@@ -1,6 +1,73 @@
 # restAPI
 
 
+---
+
+## ✅ `@Controller` (Traditional MVC Controller)
+
+* **Used in:** Traditional Spring MVC web applications
+* **Purpose:** Returns **HTML views** using templates (like JSP, Thymeleaf)
+* **Needs:** You usually write `@ResponseBody` manually when returning raw data like JSON
+
+### Example:
+
+```java
+@Controller
+public class MyController {
+    
+    @GetMapping("/hello")
+    @ResponseBody
+    public String hello() {
+        return "Hello from Controller";
+    }
+}
+```
+
+> ⚠️ Without `@ResponseBody`, it will try to find a view (like a JSP file) named `hello`.
+
+---
+
+## ✅ `@RestController` (Simplified for REST APIs)
+
+* **Used in:** RESTful APIs (like JSON-based services)
+* **Purpose:** Returns **data** (usually JSON/XML) directly in the response body
+* **Combination:** It’s shorthand for `@Controller + @ResponseBody`
+
+### Example:
+
+```java
+@RestController
+public class MyRestController {
+    
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from RestController";
+    }
+}
+```
+
+> ✔️ Automatically converts the return value to JSON or XML using Jackson or other message converters.
+
+---
+
+## 🔁 Summary Table
+
+| Feature                 | `@Controller`           | `@RestController`       |
+| ----------------------- | ----------------------- | ----------------------- |
+| Returns                 | Views (HTML, JSP, etc.) | Data (JSON, XML, etc.)  |
+| Use with REST APIs      | ❌ Not preferred         | ✅ Recommended           |
+| Adds @ResponseBody      | ❌ Manually required     | ✅ Automatically applied |
+| Used with View Resolver | ✅ Yes                   | ❌ No view rendering     |
+
+---
+
+## 💡 When to Use What?
+
+* Use **`@RestController`** for APIs that return data.
+* Use **`@Controller`** for web apps that render HTML pages.
+
+
+
 
 ### 🔍 What is `Optional` in Java?
 
